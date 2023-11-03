@@ -16,6 +16,9 @@
       <div class="flex-fill">
         <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
           <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/dashboard">Dashboard</a>
           </li>
           <li class="nav-item">
@@ -24,11 +27,20 @@
           <li class="nav-item">
             <a class="nav-link" href="/shop">Shop</a>
           </li>
-          {{-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="/contact">Contact</a>
-          </li> --}}
+          </li>
         </ul>
       </div>
+      @auth
+      @else
+        <div class="navbar align-self-center d-flex">
+          <div class="">
+            <a href="{{ route('login') }}" class="nav-icon position-relative text-decoration-none">Log in</a>
+            <a href="{{ route('register') }}" class="nav-icon position-relative text-decoration-none">Register</a>
+          </div>
+        </div>
+      @endauth
       <div class="navbar align-self-center d-flex">
         <div class="d-lg-none flex-sm-fill col-7 col-sm-auto mb-4 mt-3 pr-3">
           <div class="input-group">
@@ -44,16 +56,12 @@
             <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
             {{-- <span class="position-absolute left-100 translate-middle badge rounded-pill bg-light text-dark top-0">7</span> --}}
           </a>
-          <a class="nav-icon position-relative text-decoration-none" href="{{route('user.profile')}}">
+          <a class="nav-icon position-relative text-decoration-none" href="{{ route('user.profile') }}">
             <i class="fa fa-fw fa-user text-dark mr-3"></i>
             {{ Auth::user()->name }}
             {{-- <span
               class="position-absolute left-100 translate-middle badge rounded-pill bg-light text-dark top-0">+99</span> --}}
           </a>
-        @else
-          <a href="{{ route('login') }}" class="nav-icon position-relative text-decoration-none">Log in</a>
-          <a href="{{ route('register') }}" class="nav-icon position-relative text-decoration-none">Register</a>
-
         @endauth
       </div>
     </div>

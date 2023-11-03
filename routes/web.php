@@ -52,5 +52,5 @@ Route::group(["prefix"=> "/user"], function () {
 
 // User Dashboard group
 Route::group(["prefix"=> "/dashboard"], function () {
-    Route::get("/", [UserDashboardController::class,"index"])->name("");
+    Route::get("/", [UserDashboardController::class,"index"])->name("user.dashboard");
 });
