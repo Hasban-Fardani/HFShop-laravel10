@@ -66,30 +66,26 @@
             </div>
           </div>
         </div>
-        <div class="d-flex flex-col flex-wrap gap-3"> 
-          <x-partials.product-card name="Baju Devfest cloud 2023" price="" rating="5"/>
-          <x-partials.product-card name="Baju Devfest cloud 2023" price="" rating="4"/>
-          <x-partials.product-card name="Baju Devfest cloud 2023" price="" rating="4"/>
-          <x-partials.product-card name="Baju Devfest cloud 2023" price="" rating="5"/>
-          <x-partials.product-card name="Baju Devfest cloud 2023" price="" rating="4"/>
-          <x-partials.product-card name="Baju Devfest cloud 2023" price="" rating="4"/>
-          <x-partials.product-card name="Baju Devfest cloud 2023" price="" rating="4"/>
-          <x-partials.product-card name="Baju Devfest cloud 2023" price="" rating="4"/>
-          <x-partials.product-card name="Baju Devfest cloud 2023" price="" rating="4"/>
-         
+        <div class="d-flex justify-content-center flex-col flex-wrap gap-3">
+          @foreach ($products as $product)
+            <x-partials.product-card :id="$product->id" :name="$product->name" :price="$product->price" :rating="$product->rating"
+              :image="$product->image" />
+          @endforeach
+
+
         </div>
         <div div="row">
+          {{-- @foreach ($products->links() as $link)
+            <p class="h5">l: {{ $link }}</p>
+          @endforeach --}}
+          {{-- {{ $product_count }} --}}
           <ul class="pagination pagination-lg justify-content-end">
-            <li class="page-item disabled">
-              <a class="page-link active rounded-0 border-top-0 border-left-0 mr-3 shadow-sm" href="#"
-                tabindex="-1">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link rounded-0 border-top-0 border-left-0 text-dark mr-3 shadow-sm" href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link rounded-0 border-top-0 border-left-0 text-dark shadow-sm" href="#">3</a>
-            </li>
+            @for ($i = 1; $i <= $pages; $i++)
+              <li class="page-item">
+                <a class="page-link {{ request('page') == $i ? 'active' : '' }} rounded-0 border-top-0 border-left-0 text-dark mr-3 shadow-sm"
+                  href="{{ route('products.index', ['page' => $i]) }}">{{ $i }}</a>
+              </li>
+            @endfor
           </ul>
         </div>
       </div>

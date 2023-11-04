@@ -13,7 +13,11 @@ class ProductController extends Controller
     public function index()
     {
         //
-        return view("product", ["products" => Product::all()]);
+        $paginate_count = 12;
+        $products = Product::paginate($paginate_count);
+        $product_count = count(Product::all());
+        $pages =  $product_count / $paginate_count;
+        return view("product", compact(["products", "pages", "product_count"]));
     }
 
     /**
@@ -38,6 +42,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        return view("product-details", compact("product"));
     }
 
     /**
