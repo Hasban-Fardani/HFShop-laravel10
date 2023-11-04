@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopPageController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\UserProfileController;
@@ -17,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+ 
+Auth::routes();
 
+// pages
 Route::get('/', function () {
     return view('index');
 })->name('index');
@@ -29,15 +33,10 @@ Route::get('/about', function(){
 Route::get('/contact', function (){
     return view('contact');
 })->name('contact');
+// end route pages
 
-Route::get('/shop', ShopPageController::class)->name('shop');
-
-Auth::routes();
-
-// product route group
-Route::group(['prefix'=> '/product'], function () {
-    
-});
+// product routes
+Route::resource("/products", ProductController::class)->only(["index", "show"]);
 
 // admin route group
 Route::group(['prefix'=> '/admin'], function () {
