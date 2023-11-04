@@ -11,8 +11,8 @@ class Product extends Model
     public function seller(){
         return $this->belongsTo(User::class);
     }
-    public function product_category(){
-        return $this->hasMany(ProductCategory::class);
+    public function category(){
+        return $this->hasOne(ProductCategory::class);
     }
     public function promo(){
         return $this->belongsTo(ProductPromo::class);

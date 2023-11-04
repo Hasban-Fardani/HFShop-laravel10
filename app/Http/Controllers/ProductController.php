@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductCategoryGroup;
+use App\Models\ProductFeedback;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,9 +19,10 @@ class ProductController extends Controller
         $paginate_count = 12;
         $products = Product::paginate($paginate_count);
         $product_count = count(Product::all());
-        $pages =  ceil($product_count / $paginate_count);
+        $pages = ceil($product_count / $paginate_count);
         $product_categories = ProductCategory::all();
-        return view("product", compact(["products", "pages", "product_count", "product_categories"]));
+        $product_category_groups = ProductCategoryGroup::all();
+        return view("product", compact(["products", "pages", "product_count", "product_categories", "product_category_groups"]));
     }
 
     /**
@@ -27,7 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
@@ -44,7 +47,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
-        return view("product-details", compact("product"));
+        $feedbacks = ProductFeedback::where("product_id", $product->id)->orderBy('rating')->get();
+        $comments = 0;  // todo : count comments
+        return view("product-details", compact(["product", "feedbacks", "comments"]));
     }
 
     /**
@@ -53,6 +58,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
+        $this->middleware("userIsAdmin");
+        return view();
     }
 
     /**

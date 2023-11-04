@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminProductsController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ShopPageController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -40,8 +39,8 @@ Route::resource("/products", ProductController::class)->only(["index", "show"]);
 
 // admin route group
 Route::group(['prefix'=> '/admin'], function () {
-    Route::middleware("auth")->get("/", [AdminDashboardController::class, "index"])->name("admin.dashboard");
-    // Route::get("/login", [AdminAuthController::class, "login"]);
+    Route::get("/", [AdminDashboardController::class, "index"])->name("admin.dashboard");
+    Route::get("/products", [AdminProductsController::class, "index"])->name("admin.products");
 })->middleware(["auth", "userIsAdmin"]);
 
 // user route group

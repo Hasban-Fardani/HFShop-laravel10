@@ -7,17 +7,25 @@
       <div class="col-lg-3">
         <h1 class="h2 pb-4">Categories</h1>
         <ul class="list-unstyled templatemo-accordion">
-          <li class="pb-3">
+          @foreach ($product_category_groups as $category_group)
+            <li class="pb-3">
             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-              Gender
+              {{ $category_group->name }}
               <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
             </a>
             <ul class="show list-unstyled collapse pl-3">
-              <li><a class="text-decoration-none" href="#">Men</a></li>
-              <li><a class="text-decoration-none" href="#">Women</a></li>
+              @foreach ($product_categories as $category)
+              {{-- {{ $category->category_group_id }}
+              {{ $category_group->id}} --}}
+              @if ($category->category_group_id == $category_group->id)
+                  <li><a class="text-decoration-none" href="#">{{ $category->name }}</a></li>
+                @endif
+              @endforeach
             </ul>
           </li>
-          <li class="pb-3">
+          @endforeach
+          
+          {{-- <li class="pb-3">
             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
               Sale
               <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
@@ -37,7 +45,7 @@
               <li><a class="text-decoration-none" href="#">Sweather</a></li>
               <li><a class="text-decoration-none" href="#">Sunglass</a></li>
             </ul>
-          </li>
+          </li> --}}
         </ul>
       </div>
 
@@ -49,10 +57,10 @@
                 <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
               </li>
               <li class="list-inline-item">
-                <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
+                <a class="h3 text-dark text-decoration-none mr-3" href="#">Fisik</a>
               </li>
               <li class="list-inline-item">
-                <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
+                <a class="h3 text-dark text-decoration-none" href="#">Digital</a>
               </li>
             </ul>
           </div>
@@ -75,14 +83,10 @@
 
         </div>
         <div div="row">
-          {{-- @foreach ($products->links() as $link)
-            <p class="h5">l: {{ $link }}</p>
-          @endforeach --}}
-          {{-- {{ $product_count }} --}}
           <ul class="pagination pagination-lg justify-content-end">
             @for ($i = 1; $i <= $pages; $i++)
               <li class="page-item">
-                <a class="page-link {{ request('page') == $i ? 'active' : '' }} rounded-0 border-top-0 border-left-0 text-dark mr-3 shadow-sm"
+                <a class="page-link {{ request('page') == $i || ($i === 1 && !request()->has('page')) ? 'active' : '' }} rounded-0 border-top-0 border-left-0 text-dark mr-3 shadow-sm"
                   href="{{ route('products.index', ['page' => $i]) }}">{{ $i }}</a>
               </li>
             @endfor

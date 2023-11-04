@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class AdminDashboardController extends Controller
+class AdminProductsController extends Controller
 {
     //
     public function __construct() {
@@ -15,6 +15,7 @@ class AdminDashboardController extends Controller
     }
 
     public function index(){
-        return view("admin.dashboard");
+        $products = Product::all();
+        return view("admin.products", compact("products"));
     }
 }
