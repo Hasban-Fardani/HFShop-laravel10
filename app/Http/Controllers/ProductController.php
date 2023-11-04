@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,8 +17,9 @@ class ProductController extends Controller
         $paginate_count = 12;
         $products = Product::paginate($paginate_count);
         $product_count = count(Product::all());
-        $pages =  $product_count / $paginate_count;
-        return view("product", compact(["products", "pages", "product_count"]));
+        $pages =  ceil($product_count / $paginate_count);
+        $product_categories = ProductCategory::all();
+        return view("product", compact(["products", "pages", "product_count", "product_categories"]));
     }
 
     /**
