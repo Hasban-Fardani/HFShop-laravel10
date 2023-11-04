@@ -27,11 +27,11 @@
       </ul>
       <ul class="list-unstyled d-flex justify-content-center mb-1">
         <li>
-          <i class="{{ $rating >= 1 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
-          <i class="{{ $rating >= 2 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
-          <i class="{{ $rating >= 3 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
-          <i class="{{ $rating >= 4 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
-          <i class="{{ $rating >= 5 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+          <i class="{{ $rating/2 >= 1 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+          <i class="{{ $rating/2 >= 2 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+          <i class="{{ $rating/2 >= 3 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+          <i class="{{ $rating/2 >= 4 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+          <i class="{{ $rating/2 >= 5 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
         </li>
       </ul>
       <p class="mb-0 text-center">Rp{{ number_format($price, 2, ',', '.') }}</p>
