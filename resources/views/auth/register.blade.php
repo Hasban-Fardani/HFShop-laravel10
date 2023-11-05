@@ -67,6 +67,30 @@
               </div>
 
               <div class="row mb-3">
+                <label for="city" class="col-md-4 col-form-label text-md-end">{{ __('City') }}</label>
+
+                <div class="col-md-6">
+                  <input id="city" type="radio" class="form-control" name="city" value="" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="province" class="col-md-4 col-form-label text-md-end">{{ __('Province') }}</label>
+
+                <div class="col-md-6">
+                  <input id="province" type="radio" class="form-control" name="province" value="" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
+
+                <div class="col-md-6">
+                  <textarea id="address" type="radio" class="form-control" name="address" value="" required></textarea>
+                </div>
+              </div>
+              
+              <div class="row mb-3">
                 <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
 
                 <div class="col-md-6">
