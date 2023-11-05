@@ -8,7 +8,7 @@
         <ul class="list-unstyled text-light footer-link-list">
           <li>
             <i class="fas fa-map-marker-alt fa-fw"></i>
-            123 Consectetur at ligula 10660
+            JL Terusan Mukodar
           </li>
           <li>
             <i class="fa fa-phone fa-fw"></i>

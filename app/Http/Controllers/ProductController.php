@@ -13,7 +13,8 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware("userIsAdmin")->except(["index", "show"]);
     }
 
@@ -35,7 +36,9 @@ class ProductController extends Controller
     public function create()
     {
         // 
-        return view("admin.product-create");
+        $this->authorize("admin");
+        $categories = ProductCategory::all();
+        return view("admin.product-create", compact(["categories"]));
     }
 
     /**
@@ -44,6 +47,29 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $this->authorize("admin");
+
+        if (!$request->input("product_category_id")) {
+            return redirect()->back()->with("failed", "Failed add new product, No Category selected");
+        }
+        if (!$request->hasFile("image")) {
+            return redirect()->back()->with("failed", "Failed add new product, No image uploaded");
+        }
+
+        $image = $request->file('image'); // Ambil file gambar dari request
+        $filename = time() . '.' . $image->getClientOriginalName(); // Buat nama file yang unik berdasarkan waktu dan ekstensi gambar
+        $path = "public/product/img/"; // Tentukan path untuk menyimpan gambar di folder public/images
+        
+        $data = [
+            ...$request->except("_token", "image"),
+            "image" => "/".$path.$filename,
+            "seller_id" => auth()->user()->id,
+        ];
+
+        $image->move($path, $filename); 
+        Product::create($data);
+        
+        return redirect()->back()->with('success', 'Success add new product');
     }
 
     /**
@@ -52,9 +78,20 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
-        $feedbacks = ProductFeedback::where("product_id", $product->id)->orderBy('rating')->get();
-        $comments = 0;  // todo : count comments
-        return view("product-details", compact(["product", "feedbacks", "comments"]));
+        $feedbacks = ProductFeedback::where(["product_id" => $product->id])->orderBy('rating')->get();
+        $comments = 0; // todo : count comments
+        $user = auth()->user();
+        return view("product-details", compact(["product", "feedbacks", "comments", "user"]));
+    }
+
+    public function admin_show(Product $product)
+    {
+        //
+        $feedbacks = ProductFeedback::where(["product_id" => $product->id])->orderBy('rating')->get();
+        $comments = 0; // todo : count comments
+        $user = auth()->user();
+        return "hi";
+        // return view("", compact(["product", "feedbacks", "comments", "user"]));
     }
 
     /**
@@ -63,6 +100,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
+        $this->authorize("admin");
         return view("admin.product-edit");
     }
 
@@ -72,6 +110,8 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $product->update($request->all());
+        return redirect()->back()->with("success", "Success edit product");
     }
 
     /**
@@ -80,7 +120,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+        // $user = auth()->user();
         $product->delete();
-        return redirect()->back()->with("success","Success delete product");
+        return redirect()->back()->with("success", "Success delete product");
     }
 }

@@ -15,12 +15,14 @@
       id="templatemo_main_nav">
       <div class="flex-fill">
         <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-          <li class="nav-item">
+          @auth
+            <li class="nav-item">
+              <a class="nav-link" href="/user">Dashboard</a>
+            </li>
+          @endauth
+          {{-- <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboard">Dashboard</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>

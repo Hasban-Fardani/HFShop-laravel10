@@ -3,16 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function __construct() {
+        $this->middleware("auth");
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        $user_id = auth()->user()->id;
+        $carts = Cart::with("product")->where("user_id", $user_id)->get();
+        return view("user.cart", compact(["carts"]));
     }
 
     /**
@@ -29,6 +37,12 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->only(["product_id", "user_id", "quantity"]));
+        $data = $request->only(["product_id", "user_id", "quantity"]);
+
+        // todo : dont create new cart if product exist on cart
+        Cart::create($data);
+        return redirect(route("user.cart"));
     }
 
     /**

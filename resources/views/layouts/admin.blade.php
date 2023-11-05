@@ -4,7 +4,7 @@
 @include('components.admin.head')
 
 <body class="sb-nav-fixed">
-  {{ $user = auth()->user() }}
+  @php $user = auth()->user() @endphp
 
   @include('components.admin.navbar')
 
@@ -12,7 +12,13 @@
     @include('components.admin.sidebar')
     
     <div id="layoutSidenav_content">
-      <main class="px-4">
+      <main class="p-4 container-fluid">
+        @if ($msg = session("success"))
+          <div class="alert alert-success" role="alert">{{ $msg }}</div>
+        @endif
+        @if ($msg = session("failed"))
+          <div class="alert alert-danger" role="alert">{{ $msg }}</div>
+        @endif
         @yield('content')
       </main>
   

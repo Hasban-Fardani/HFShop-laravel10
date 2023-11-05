@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ProductCategory extends Model
 {
     use HasFactory;
-    // public function products(){
-    //     return $this->belongsToMany(Product::class);
-    // }
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
     public function group(){
-        return $this->hasOne(ProductCategoryGroup::class);
+        return $this->belongsTo(ProductCategoryGroup::class);
     }
 }
