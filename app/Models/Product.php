@@ -12,7 +12,7 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
     public function category(){
-        return $this->hasOne(ProductCategory::class);
+        return $this->belongsToMany(ProductCategory::class, "product_categories");
     }
     public function promo(){
         return $this->belongsTo(ProductPromo::class);

@@ -7,7 +7,7 @@
         <th>Image</th>
         <th>Name</th>
         <th>Price</th>
-        {{-- <th>Categories</th> --}}
+        <th>Categories</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -32,6 +32,7 @@
         </td>
         <td>{{ $product->name }}</td>
         <td>Rp{{ number_format($product->price, 2, ',', '.') }}</td>
+        <td>{{ $product->category_id }}</td>
         
         <td>
           <div class="d-flex gap-2" style="width: 150px">
