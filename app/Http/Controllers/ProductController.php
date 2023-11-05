@@ -13,6 +13,10 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct() {
+        $this->middleware("userIsAdmin")->except(["index", "show"]);
+    }
+
     public function index()
     {
         //
@@ -31,6 +35,7 @@ class ProductController extends Controller
     public function create()
     {
         // 
+        return view("admin.product-create");
     }
 
     /**
@@ -58,8 +63,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-        $this->middleware("userIsAdmin");
-        return view();
+        return view("admin.product-edit");
     }
 
     /**
@@ -76,5 +80,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+        $product->delete();
+        return redirect()->back()->with("success","Success delete product");
     }
 }

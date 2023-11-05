@@ -32,7 +32,7 @@
         </td>
         <td>{{ $product->name }}</td>
         <td>Rp{{ number_format($product->price, 2, ',', '.') }}</td>
-        <td>{{ $product->category_id }}</td>
+        <td>{{ $product->category }}</td>
         
         <td>
           <div class="d-flex gap-2" style="width: 150px">

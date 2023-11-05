@@ -17,9 +17,25 @@
         </a>
         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
           <nav class="sb-sidenav-menu-nested nav">
-            <a class="nav-link" href="{{ route('admin.products') }}">Products List</a>
-            <a class="nav-link" href="layout-sidenav-light.html">Add Product</a>
-            <a class="nav-link" href="layout-sidenav-light.html">Edit Product</a>
+            <a class="nav-link" href="{{ route('admin.products.index') }}">Products List</a>
+            <a class="nav-link" href="{{ route('admin.products.create') }}">Add Product</a>
+            <a class="nav-link" href="{{ route('admin.products.edit', 0) }}">Edit Product</a>
+          </nav>
+        </div>
+
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2"
+          aria-expanded="false" aria-controls="collapseLayouts2">
+          <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+          Categories
+          <div class="sb-sidenav-collapse-arrow">
+            @include('icons.dropdown')
+          </div>
+        </a>
+        <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+          <nav class="sb-sidenav-menu-nested nav">
+            <a class="nav-link" href="#">Categories List</a>
+            <a class="nav-link" href="#">Add Categories</a>
+            <a class="nav-link" href="#">Edit Categories</a>
           </nav>
         </div>
 
