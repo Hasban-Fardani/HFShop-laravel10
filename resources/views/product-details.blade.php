@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-lg-5 mt-5">
           <div class="card mb-3">
-            <img class="card-img img-fluid" src="assets/img/product_single_10.jpg" alt="Card image cap" id="product-detail">
+            <img class="card-img img-fluid" src="{{ $product->image }}" alt="{{ $product->name }}" id="product-detail">
           </div>
           <div class="row">
             <!--Start Controls-->
@@ -20,7 +20,7 @@
             <!--End Controls-->
             <!--Start Carousel Wrapper-->
             <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
-              <!--Start Slides-->
+              {{-- <!--Start Slides-->
               <div class="carousel-inner product-links-wap" role="listbox">
 
                 <!--First slide-->
@@ -89,7 +89,7 @@
                 </div>
                 <!--/.Third slide-->
               </div>
-              <!--End Slides-->
+              <!--End Slides--> --}}
             </div>
             <!--End Carousel Wrapper-->
             <!--Start Controls-->
@@ -135,7 +135,6 @@
                   <script>
                     window.location.href = "/login"
                   </script>
-                  <input type="hidden" name="user_id" value="0">
                 @endif
 
                 <div class="row">

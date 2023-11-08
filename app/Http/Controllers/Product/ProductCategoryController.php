@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Product;
 
+use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,8 @@ class ProductCategoryController extends Controller
     public function index()
     {
         //
+        $categories = ProductCategory::orderBy("created_at","desc")->get();
+        return view("admin.categories", compact("categories"));
     }
 
     /**
@@ -24,6 +27,7 @@ class ProductCategoryController extends Controller
     public function create()
     {
         //
+        return view("admin.categories-create");
     }
 
     /**
@@ -32,6 +36,8 @@ class ProductCategoryController extends Controller
     public function store(Request $request)
     {
         //
+        ProductCategory::create($request->except("_token"));
+        return redirect()->back()->with("success","add new product category");
     }
 
     /**
@@ -40,6 +46,7 @@ class ProductCategoryController extends Controller
     public function show(ProductCategory $productCategory)
     {
         //
+        return view("admin.categories-show", compact("productCategory"));
     }
 
     /**
@@ -48,6 +55,7 @@ class ProductCategoryController extends Controller
     public function edit(ProductCategory $productCategory)
     {
         //
+        return view("admin.categories-edit", compact("productCategory"));
     }
 
     /**
@@ -56,6 +64,8 @@ class ProductCategoryController extends Controller
     public function update(Request $request, ProductCategory $productCategory)
     {
         //
+        $productCategory->update($request->except("_token"));
+        return redirect()->back()->with("success","success edit product category");
     }
 
     /**
@@ -64,5 +74,7 @@ class ProductCategoryController extends Controller
     public function destroy(ProductCategory $productCategory)
     {
         //
+        $productCategory->delete();
+        return redirect()->back()->with("success","success delete product category");
     }
 }

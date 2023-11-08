@@ -6,8 +6,10 @@
     <table id="datatablesProducts">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Image</th>
           <th>Name</th>
+          <th>stok</th>
           <th>Price</th>
           <th>Categories</th>
           <th>Action</th>
@@ -17,6 +19,7 @@
       <tbody>
         @foreach ($products as $product)
           <tr>
+            <td>{{ $product->id }}</td>
             <td>
               <div>
                 <x-partials.image-card href="#" :src="$product->image" title="edit"
@@ -24,6 +27,7 @@
               </div>
             </td>
             <td>{{ $product->name }}</td>
+            <td>{{ $product->stok }}</td>
             <td>Rp{{ number_format($product->price, 2, ',', '.') }}</td>
             <td>{{ $product->category->name }}</td>
 

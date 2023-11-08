@@ -16,7 +16,7 @@
         @if ($msg = session("success"))
           <div class="alert alert-success" role="alert">{{ $msg }}</div>
         @endif
-        @if ($msg = session("failed"))
+        @if ($msg = session("error"))
           <div class="alert alert-danger" role="alert">{{ $msg }}</div>
         @endif
         @yield('content')

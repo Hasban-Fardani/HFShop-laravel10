@@ -22,11 +22,11 @@
         </a>
         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
           <nav class="sb-sidenav-menu-nested nav">
-            <a class="nav-link" href="{{ route('admin.products.index') }}">My Orders</a>
-            <a class="nav-link" href="{{ route('admin.products.create') }}">Feedbacks</a>
+            <a class="nav-link" href="{{ route('user.order.list') }}">My Orders</a>
+            <a class="nav-link" href="#">Feedbacks</a>
           </nav>
         </div>
-        <a class="nav-link {{ Route::is("user.cart") ? 'active' : ''}}" href="{{route('user.cart')}}">
+        <a class="nav-link {{ Route::is("user.cart.index") ? 'active' : ''}}" href="{{route('user.cart.index')}}">
           <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
           Cart
         </a>

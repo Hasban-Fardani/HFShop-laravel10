@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Expedition extends Model
 {
     use HasFactory;
-    public function price(){
-        return $this->belongsTo(ExpeditionPrice::class);
+    public function prices(){
+        return $this->hasMany(ExpeditionPrice::class);
     }
 }

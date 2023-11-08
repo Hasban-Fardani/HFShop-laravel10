@@ -9,7 +9,7 @@ class UserProfileController extends Controller
 {
     //
     public function index(){
-        $user = auth()->user();
-        return view("user.profile",compact("user"));
+        $this->middleware(["auth", "userIsNotAdmin"]);
+        return view("user.profile");
     }
 }

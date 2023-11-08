@@ -1,3 +1,27 @@
 /*
 Custom Css
 */
+* {
+  --bs-100: #1B262C;
+  --primary: #0F4C75;
+  --secondary: #3282B8;
+  --third: #BBE1FA;
+}
+
+nav.navbar {
+  background-color: var(--bs-100);
+  color: white;
+}
+
+#title,
+#templatemo_main_nav>div.flex-fill>ul>li>a,
+#templatemo_main_nav>div.navbar.align-self-center.d-flex>a,
+#templatemo_main_nav > div:nth-child(2) > div > a {
+  color: white;
+}
+
+#templatemo_main_nav>div.flex-fill>ul>li>a:hover,
+#templatemo_main_nav>div.navbar.align-self-center.d-flex>a:hover,
+#templatemo_main_nav > div:nth-child(2) > div > a:hover {
+  color: gray;
+}

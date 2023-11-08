@@ -13,6 +13,6 @@
   <link href="{{asset('assets/sbadmin/css/styles.css')}}" rel="stylesheet" />
   <link rel="stylesheet" href="{{asset('assets/sbadmin/css/custom.css')}}">
 
-  {{-- Fontawesome --}}
-  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> --}}
+  {{-- autocomplete --}}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-autocomplete/dist/latest/bootstrap-autocomplete.min.js"></script>
 </head>

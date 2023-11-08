@@ -13,18 +13,6 @@
       <th>Action</th>
     </tr>
   </thead>
-
-  {{-- <tfoot>
-    <tr>
-      <th>Name</th>
-      <th>Categories</th>
-      <th>Price</th>
-      <th>Age</th>
-      <th>Start date</th>
-      <th>Salary</th>
-      <th>Action</th>
-    </tr>
-  </tfoot> --}}
   <tbody>
     @foreach ($carts as $cart)
     <tr>
@@ -35,15 +23,12 @@
       <td>Rp{{ number_format($cart->product->price, 2, ',', '.') }}</td>
       <td>{{ $cart->quantity }}</td>
       <td>Rp{{ number_format($cart->quantity * $cart->product->price) }}</td>
-      {{-- <td>{{ $p }}</td> --}}
-      
       <td>
         <div class="d-flex gap-2" style="width: 150px">
-          <a href="" class="btn btn-warning">Edit</a>
-          <form action="" method="post">
-            @csrf
-            <button type="submit" class="btn btn-primary">Pay</button>
-          </form>
+          <a href="{{ route("user.cart.edit", $cart->id) }}" class="btn btn-warning">@include("icons.edit")</a>
+          <a href="{{ route("order", $cart->id) }}" class="btn btn-primary">
+            @include("icons.money")
+          </a>
         </div>
       </td>
     </tr>

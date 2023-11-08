@@ -3,12 +3,13 @@
   <div class="d-flex justify-content-between align-items-center container">
 
     <a class="navbar-brand logo h1 align-self-center" href="/">
-      HF Shop
+      <img src="{{ asset('HF.png') }}" alt="" width="60">
+      <span id="title">HF Shop</span>
     </a>
 
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      @include("icons.bar")
     </button>
 
     <div class="align-self-center navbar-collapse flex-fill d-lg-flex justify-content-lg-between collapse"
@@ -16,13 +17,16 @@
       <div class="flex-fill">
         <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
           @auth
-            <li class="nav-item">
-              <a class="nav-link" href="/user">Dashboard</a>
-            </li>
+            @can('admin')
+              <li class="nav-item">
+                <a class="nav-link" href="/user">Dashboard</a>
+              </li>
+            @else
+              <li class="nav-item">
+                <a class="nav-link" href="/user">Dashboard</a>
+              </li>
+            @endcan
           @endauth
-          {{-- <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li> --}}
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>
@@ -48,22 +52,29 @@
           <div class="input-group">
             <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
             <div class="input-group-text">
-              <i class="fa fa-fw fa-search"></i>
+             @include("icons.search")
             </div>
           </div>
         </div>
 
         @auth
-          <a class="nav-icon position-relative text-decoration-none" href="#">
-            <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-            {{-- <span class="position-absolute left-100 translate-middle badge rounded-pill bg-light text-dark top-0">7</span> --}}
-          </a>
-          <a class="nav-icon position-relative text-decoration-none" href="{{ route('user.profile') }}">
-            <i class="fa fa-fw fa-user text-dark mr-3"></i>
-            {{ Auth::user()->name }}
-            {{-- <span
-              class="position-absolute left-100 translate-middle badge rounded-pill bg-light text-dark top-0">+99</span> --}}
-          </a>
+          @can('admin')
+            <a class="nav-icon position-relative text-decoration-none" href="/admin">
+              @include('icons.cart')
+            </a>
+            <a class="nav-icon position-relative text-decoration-none" href="{{ route('admin.profile') }}">
+              @include('icons.user')
+              {{ Auth::user()->name }}
+            </a>
+          @else
+            <a class="nav-icon position-relative text-decoration-none" href="{{ route('user.cart.index') }}">
+              @include('icons.cart')
+            </a>
+            <a class="nav-icon position-relative text-decoration-none" href="{{ route('user.profile') }}">
+              @include('icons.user')
+              {{ Auth::user()->name }}
+            </a>
+          @endcan
         @endauth
       </div>
     </div>
@@ -83,7 +94,7 @@
       <div class="input-group mb-2">
         <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
         <button type="submit" class="input-group-text bg-success text-light">
-          <i class="fa fa-fw fa-search text-white"></i>
+          @include("icons.search", ["color"=>"white"])
         </button>
       </div>
     </form>

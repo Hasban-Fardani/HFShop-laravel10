@@ -22,7 +22,6 @@
         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
           <nav class="sb-sidenav-menu-nested nav">
             <a class="nav-link" href="{{ route('admin.products.index') }}">
-              {{-- @include('icons.table-list') --}}
               <span>
                 Products List
               </span>
@@ -42,15 +41,15 @@
         </a>
         <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
           <nav class="sb-sidenav-menu-nested nav">
-            <a class="nav-link" href="#">Categories List</a>
-            <a class="nav-link" href="#">Add Categories</a>
+            <a class="nav-link" href="{{route("admin.categories.index")}}">Categories List</a>
+            <a class="nav-link" href="{{route("admin.categories.create")}}">Add Categories</a>
             <a class="nav-link" href="#">Edit Categories</a>
           </nav>
         </div>
 
         <div class="sb-sidenav-menu-heading">Custommers</div>
 
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route("admin.order.index") }}">
           <div class="sb-nav-link-icon">@include('icons.dolly')</div>
           Orders
         </a>
@@ -74,17 +73,7 @@
           aria-expanded="false" aria-controls="collapsePages">
           <div class="sb-nav-link-icon">@include('icons.gear')</div>
           Account Setting
-          <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
         </a>
-        {{-- <div class="sb-sidenav-menu-heading">Addons</div>
-        <a class="nav-link" href="charts.html">
-          <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-          Charts
-        </a>
-        <a class="nav-link" href="tables.html">
-          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-          Tables
-        </a> --}}
       </div>
     </div>
     <div class="sb-sidenav-footer">
