@@ -26,4 +26,8 @@ class Product extends Model
     public function orders(){
         return $this->hasMany(Order::class);
     }
+
+    public function feedbacks(){
+        return $this->hasMany(ProductFeedback::class);
+    }
 }

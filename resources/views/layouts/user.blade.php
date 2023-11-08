@@ -1,7 +1,7 @@
 {{-- User Dashboard Layout --}}
 <!DOCTYPE html>
 <html lang="en">
-@include('components.admin.head')
+@include('components.user.head')
 
 <body class="sb-nav-fixed">
   @php $user = auth()->user() @endphp

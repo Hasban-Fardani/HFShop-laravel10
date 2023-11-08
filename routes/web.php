@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminProductsController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Product\ProductCategoryController;
+use App\Http\Controllers\User\UserCreateProductFeedbackController;
 use App\Http\Controllers\User\UserOrderController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\User\UserDashboardController;
@@ -67,7 +68,7 @@ Route::group(["prefix" => "/admin"], function () {
         Route::post("/store", [ProductCategoryController::class, "store"])->name("admin.categories.store");
         Route::get("/details/{productCategory}", [ProductCategoryController::class, "show"])->name("admin.categories.show");
         Route::get("/edit/{productCategory}", [ProductCategoryController::class, "edit"])->name("admin.categories.edit");
-        Route::put("/update/{productCategory}", [ProductCategoryController::class, "edit"])->name("admin.categories.update");
+        Route::put("/update/{productCategory}", [ProductCategoryController::class, "update"])->name("admin.categories.update");
         Route::delete("/delete/{productCategory}", [ProductCategoryController::class, "destroy"])->name("admin.categories.destroy");
     });
 
@@ -80,6 +81,7 @@ Route::group(["prefix" => "/admin"], function () {
     // order (see customer order)
     Route::group(["prefix"=> "/orders"], function () {
         Route::get("/", [AdminOrderController::class, "index"])->name("admin.order.index");
+        Route::get("/edit/{order}", [AdminOrderController::class, "index"])->name("admin.order.edit");
         Route::get("/details/{order}", [AdminOrderController::class, "show"])->name("admin.order.details");
         Route::post("/accept", [AdminOrderController::class, "accept"])->name("admin.order.accept");
         Route::post("/decline", [AdminOrderController::class, "decline"])->name("admin.order.decline");;
@@ -92,6 +94,7 @@ Route::group(["prefix" => "/user"], function () {
     Route::get("/", [UserDashboardController::class, "index"])->name("user.dashboard");
     Route::get("/profile", [UserProfileController::class, "index"])->name("user.profile")->middleware("userIsNotAdmin");
 
+    // carts group
     Route::group(["prefix" => "/carts"], function () {
         Route::get("/", [UserCartController::class, "index"])->name("user.cart.index");
         Route::get("/{cart}", [UserCartController::class, "show"])->name("user.cart.details");
@@ -99,6 +102,7 @@ Route::group(["prefix" => "/user"], function () {
         Route::post("/add", [UserCartController::class, "store"])->name("add.cart");
     });
 
+    // orders group
     Route::prefix("/order")->group(function () {
         // create order from request data
         Route::get("/create", [UserOrderController::class, "create_fast"])->name("fast_order");
@@ -111,12 +115,17 @@ Route::group(["prefix" => "/user"], function () {
 
         // get all orders for user
         Route::get("/list", [UserOrderController::class, "list"])->name("user.order.list");
+        
+        // 
+        Route::get("/details/{order}", [UserOrderController::class, "details"])->name("user.order.detail");
     });
 
     Route::get("/pay/{order}", [PayController::class, "create"])->name("pay.create");
     Route::post("/pay/{order}", [PayController::class, "pay"])->name("pay");
 
+    // feedbacks
+    Route::post("feedback/product/{product_id}", [UserCreateProductFeedbackController::class, "store"])->name("user.feedback.store");
+    Route::put("feedback/product/{product_feedback}", [UserCreateProductFeedbackController::class, "update"])->name("user.feedback.update");
 })->middleware(["auth", "userIsNotAdmin"]);
-
 
 // Route::post("/pay/{}", [PayController::class, "pay"])->name("pay");

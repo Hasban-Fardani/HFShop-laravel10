@@ -46,7 +46,7 @@ class ProductCategoryController extends Controller
     public function show(ProductCategory $productCategory)
     {
         //
-        return view("admin.categories-show", compact("productCategory"));
+        return view("admin.categories-show", ["category" => $productCategory]);
     }
 
     /**
@@ -55,7 +55,7 @@ class ProductCategoryController extends Controller
     public function edit(ProductCategory $productCategory)
     {
         //
-        return view("admin.categories-edit", compact("productCategory"));
+        return view("admin.categories-edit", ["category" => $productCategory]);
     }
 
     /**
@@ -64,7 +64,8 @@ class ProductCategoryController extends Controller
     public function update(Request $request, ProductCategory $productCategory)
     {
         //
-        $productCategory->update($request->except("_token"));
+        // dd($request->except("_token"));
+        $productCategory->update($request->except(["_token", "_method"]));
         return redirect()->back()->with("success","success edit product category");
     }
 
@@ -74,6 +75,10 @@ class ProductCategoryController extends Controller
     public function destroy(ProductCategory $productCategory)
     {
         //
+        if ($productCategory->products()->count()){
+            return redirect()->back()->with("failed", "Cannot delete category that has products");
+        }
+        
         $productCategory->delete();
         return redirect()->back()->with("success","success delete product category");
     }

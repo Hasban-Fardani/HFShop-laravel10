@@ -27,7 +27,6 @@
               </span>
             </a>
             <a class="nav-link" href="{{ route('admin.products.create') }}">Add Product</a>
-            <a class="nav-link" href="{{ route('admin.products.edit', 0) }}">Edit Product</a>
           </nav>
         </div>
 
@@ -43,7 +42,6 @@
           <nav class="sb-sidenav-menu-nested nav">
             <a class="nav-link" href="{{route("admin.categories.index")}}">Categories List</a>
             <a class="nav-link" href="{{route("admin.categories.create")}}">Add Categories</a>
-            <a class="nav-link" href="#">Edit Categories</a>
           </nav>
         </div>
 

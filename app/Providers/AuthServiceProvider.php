@@ -39,5 +39,6 @@ class AuthServiceProvider extends ServiceProvider
                 !is_null($user->address) &&
                 $user->role == "user";
         });
+
     }
 }

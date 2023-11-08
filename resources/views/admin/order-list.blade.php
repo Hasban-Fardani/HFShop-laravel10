@@ -21,7 +21,8 @@
             {{ $order->user->name }}
           </td>
           <td>
-            <a href="{{ route('admin.products.show', $order->product->id) }}">{{ $order->product->id }} - {{ $order->product->name }}</a>
+            <a href="{{ route('admin.products.show', $order->product->id) }}">{{ $order->product->id }} -
+              {{ $order->product->name }}</a>
           </td>
           <td>{{ $order->quantity }}</td>
           <td>
@@ -43,6 +44,16 @@
                     @include('icons.delete')
                   </button>
                 </form>
+              </div>
+            @else
+              <div class="d-flex gap-1">
+                <a href="{{ route('admin.order.edit', $order->id) }}" class="btn btn-primary">
+                  @csrf
+                  {{-- <button type="submit" class="btn btn-primary" name="order_id" value="{{ $order->id }}"> --}}
+                    {{-- @include('icons.truck') --}}
+                    @include("icons.edit")
+                  {{-- </button> --}}
+                </a>
               </div>
             @endif
           </td>

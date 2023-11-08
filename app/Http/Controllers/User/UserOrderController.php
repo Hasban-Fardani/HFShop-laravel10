@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\ExpeditionPrice;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductFeedback;
 use App\Models\ProductPromo;
 use Illuminate\Http\Request;
 
@@ -82,5 +83,10 @@ class UserOrderController extends Controller
         $user = auth()->user();
         $orders = Order::where("user_id", $user->id)->get();
         return view("user.order-list", compact(["orders"]));
+    }
+
+    public function details(Order $order){
+        $feedback = ProductFeedback::where(["user_id" => auth()->user()->id, "product_id" => $order->product->id])->first();
+        return view("user.order-details", compact(["order", "feedback"]));
     }
 }

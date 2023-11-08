@@ -9,7 +9,9 @@
   {{-- @include("components.navbar") --}}
 
   @include('components.header')
-
+  @php
+    $user = auth()->user();
+  @endphp
   @yield('content')
 
   @include('components.footer')

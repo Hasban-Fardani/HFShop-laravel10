@@ -78,8 +78,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        // dd($product);
         $feedbacks = ProductFeedback::where(["product_id" => $product->id])->orderBy('rating')->get();
-        // Count comments which 'comment' field is not empty
         $comments = ProductFeedback::where(['product_id' => $product->id])->whereNotNull('comment')->count();
         return view("product-details", compact(["product", "feedbacks", "comments"]));
     }
@@ -130,10 +130,11 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
-        $orders = $product->orders; 
+        $orders = $product->orders->count(); 
         if ($orders){
-            return $orders;
+            return redirect()->back()->with("error", "Error, you cannot delete product that has order not finished");
         }
+
         $product->delete();
         return redirect()->back()->with("success", "Success delete product");
     }

@@ -6,7 +6,7 @@
     <div class="container pb-5">
       <div class="row">
         <div class="col-lg-5 mt-5">
-          <div class="card mb-3">
+          <div class="card mb-3 px-1">
             <img class="card-img img-fluid" src="{{ $product->image }}" alt="{{ $product->name }}" id="product-detail">
           </div>
           <div class="row">
@@ -106,22 +106,32 @@
         <div class="col-lg-7 mt-5">
           <div class="card">
             <div class="card-body">
+              @php
+                $total_rating = 0;
+                $count_rating = 0;
+                foreach ($product->feedbacks as $feedback) {
+                    $total_rating += $feedback->rating;
+                    $count_rating += 1;
+                }
+              @endphp
               <h1 class="h2">{{ $product->name }}</h1>
               <p class="h3 py-2">Rp{{ number_format($product->price, 2, ',', '.') }}</p>
               <p class="py-2">
-                <i class="fa fa-star text-warning"></i>
-                <i class="fa fa-star text-warning"></i>
-                <i class="fa fa-star text-warning"></i>
-                <i class="fa fa-star text-warning"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <span class="list-inline-item text-dark">Rating {{ $product->rating / 2 }} | {{ $comments }}
-                  Comments</span>
+                <i class="{{ $total_rating / 2 >= 1 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                <i class="{{ $total_rating / 2 >= 2 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                <i class="{{ $total_rating / 2 >= 3 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                <i class="{{ $total_rating / 2 >= 4 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                <i class="{{ $total_rating / 2 >= 5 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                {{-- {{ }} --}}
+              <p class="list-inline-item text-dark">Rating {{ $total_rating / 2 }} customer |
+                {{ $comments }}
+                Comments</p>
               </p>
 
               <h6>Description:</h6>
               <div>{{ $product->description }}</div>
-              <div class="d-flex">
-                <p>Stok: </p>
+              <div class="d-flex mt-2">
+                <p class="">Stok: </p>
                 <p>{{ $product->stok }}</p>
               </div>
               <form action="{{ route('add.cart') }}" method="POST">
@@ -130,11 +140,6 @@
 
                 @if (isset($user->id))
                   <input type="hidden" name="user_id" value="{{ $user->id }}">
-                @else
-                {{-- redirect to login if not logged in --}}
-                  <script>
-                    window.location.href = "/login"
-                  </script>
                 @endif
 
                 <div class="row">
@@ -161,6 +166,32 @@
                 </div>
               </form>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card mt-3">
+          <div class="card-body">
+            <h3>Costomers Feedbacks</h3>
+            @if ($product->feedbacks->count())
+              @foreach ($product->feedbacks as $feedback)
+              <div class="card">
+                <div class="card-body">
+                  <h6>{{ $feedback->user->name }}</h6>
+                  <div>
+                    <i class="{{ $feedback->rating / 2 >= 1 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                    <i class="{{ $feedback->rating / 2 >= 2 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                    <i class="{{ $feedback->rating / 2 >= 3 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                    <i class="{{ $feedback->rating / 2 >= 4 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                    <i class="{{ $feedback->rating / 2 >= 5 ? 'text-warning' : 'text-muted' }} fa fa-star"></i>
+                  </div>
+                  {{ $feedback->comment }}
+                </div>
+              </div>
+              @endforeach
+            @else
+              <p>-no customer feedbacks-</p>
+            @endif
           </div>
         </div>
       </div>
